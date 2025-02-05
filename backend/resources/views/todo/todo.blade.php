@@ -83,9 +83,16 @@
 
                 <!-- Toggle button -->
                 <div class="flex space-x-2">
-                  <button class="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 delete-btn">
-                    ✕
-                  </button>
+                  <form
+                    action="{{ route('todo.delete', $task->id) }}"
+                    method="POST"
+                    onsubmit="return confirm('Are you sure?')">
+                    @csrf
+                    @method('delete')
+                    <button class="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 delete-btn">
+                      ✕
+                    </button>
+                  </form>
 
                   <button @click="open = !open" class="bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 edit-btn">
                     ✎
