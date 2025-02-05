@@ -63,9 +63,22 @@ class TodoController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Todo $todo)
+  public function update(Request $request, string $id)
   {
-    //
+    $request->validate([
+      'task' => 'required|min:3'
+    ], [
+      'task.required' => 'The task field is required',
+      'task.min' => 'The task field must be at least 3 characters'
+    ]);
+
+    $updateTask = [
+      'task' => $request->input('task'),
+      'completed' => $request->input('completed')
+    ];
+
+    Todo::where('id', $id)->update($updateTask);
+    return redirect()->route('todo')->with('success', 'Task updated successfully');
   }
 
   /**

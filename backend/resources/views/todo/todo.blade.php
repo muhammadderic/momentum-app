@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="bg-gray-100">
-  <!-- 00. Navbar -->
+  <!-- Navbar -->
   <nav class="bg-gray-800 text-white py-4">
     <div class="container mx-auto px-4 max-w-4xl">
       <div class="text-xl font-semibold">
@@ -81,27 +81,56 @@
 
                 <!-- Toggle button -->
                 <div class="flex space-x-2">
-                  <button class="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 delete-btn">✕</button>
-                  <button @click="open = !open" class="bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 edit-btn">✎</button>
+                  <button class="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 delete-btn">
+                    ✕
+                  </button>
+
+                  <button @click="open = !open" class="bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 edit-btn">
+                    ✎
+                  </button>
                 </div>
               </div>
 
               <!-- Collapsible content -->
               <div class="w-full">
-                <div x-show="open" x-transition class="bg-gray-50 p-4 rounded-lg shadow-sm mt-4">
-                  <form action="" method="POST">
+                <div
+                  x-show="open"
+                  x-transition
+                  class="bg-gray-50 p-4 rounded-lg shadow-sm mt-4">
+                  <form action="{{ route('todo.update', $task->id) }}" method="POST">
+                    @csrf
+                    @method('put')
                     <div class="mb-4">
                       <div class="flex">
-                        <input type="text" class="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" name="task" value="{{ $task->task }}">
-                        <button type="button" class="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Update</button>
+                        <input
+                          type="text"
+                          class="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          name="task"
+                          value="{{ $task->task }}">
+
+                        <button type="submit" class="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                          Update
+                        </button>
                       </div>
                     </div>
+
                     <div class="flex space-x-4">
                       <label class="flex items-center">
-                        <input type="radio" value="1" name="completed" class="mr-2" {{ $task->completed == '1' ? 'checked' : '' }}> Finish
+                        <input
+                          type="radio"
+                          value="1"
+                          name="completed"
+                          class="mr-2"
+                          {{ $task->completed == '1' ? 'checked' : '' }}> Finish
                       </label>
+
                       <label class="flex items-center">
-                        <input type="radio" value="0" name="completed" class="mr-2" {{ $task->completed == '0' ? 'checked' : '' }}> Not Finish
+                        <input
+                          type="radio"
+                          value="0"
+                          name="completed"
+                          class="mr-2"
+                          {{ $task->completed == '0' ? 'checked' : '' }}> Not Finish
                       </label>
                     </div>
                   </form>
