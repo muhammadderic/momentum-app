@@ -73,16 +73,17 @@
           </form>
 
           <ul class="space-y-4" id="todo-list">
-            <!-- 04. Display Data -->
+            @foreach ($tasks as $task)
+            <!-- Display Data -->
             <li class="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm">
               <span class="task-text">
-                Coding
+                {{ $task->task }}
               </span>
 
               <input
                 type="text"
                 class="hidden border border-gray-300 rounded-lg p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 edit-input"
-                value="Coding">
+                value="{{ $task->task }}">
 
               <div class="flex space-x-2">
                 <button class="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 delete-btn">✕</button>
@@ -90,7 +91,7 @@
               </div>
             </li>
 
-            <!-- 05. Update Data -->
+            <!-- Update Data -->
             <li class="bg-gray-50 p-4 rounded-lg shadow-sm mt-4">
               <form action="" method="POST">
                 <div class="mb-4">
@@ -99,7 +100,7 @@
                       type="text"
                       class="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       name="task"
-                      value="Coding">
+                      value="{{ $task->task }}">
 
                     <button type="button" class="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                       Update
@@ -112,19 +113,22 @@
                     <input
                       type="radio"
                       value="1"
-                      name="is_done"
-                      class="mr-2"> Finish
+                      name="completed"
+                      class="mr-2"
+                      {{ $task->completed == '1' ? 'checked' : '' }}> Finish
                   </label>
                   <label class="flex items-center">
                     <input
                       type="radio"
                       value="0"
-                      name="is_done"
-                      class="mr-2"> Not Finish
+                      name="completed"
+                      class="mr-2"
+                      {{ $task->completed == '0' ? 'checked' : '' }}> Not Finish
                   </label>
                 </div>
               </form>
             </li>
+            @endforeach
           </ul>
         </div>
       </div>
