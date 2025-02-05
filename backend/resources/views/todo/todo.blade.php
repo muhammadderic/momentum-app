@@ -76,7 +76,9 @@
             <li x-data="{ open: false }" class="flex flex-col justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm border border-red-800">
               <div class="w-full flex justify-between items-center">
                 <div class="task-text">
-                  {{ $task->task }}
+                  {!! $task->completed == '1' ? '<del>' : '' !!}
+                    {{ $task->task }}
+                    {!! $task->completed == '1' ? '</del>' : '' !!}
                 </div>
 
                 <!-- Toggle button -->
