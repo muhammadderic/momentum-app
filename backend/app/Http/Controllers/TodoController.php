@@ -12,7 +12,7 @@ class TodoController extends Controller
    */
   public function index()
   {
-    return view('welcome');
+    return view('todo.todo');
   }
 
   /**
@@ -28,7 +28,19 @@ class TodoController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'task' => 'required|min:3'
+    ], [
+      'task.required' => 'The task field is required',
+      'task.min' => 'The task field must be at least 3 characters'
+    ]);
+
+    $newTask = [
+      'task' => $request->input('task')
+    ];
+
+    Todo::create($newTask);
+    return redirect()->route('todo')->with('success', 'Task added successfully');
   }
 
   /**

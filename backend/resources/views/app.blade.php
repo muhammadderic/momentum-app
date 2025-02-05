@@ -20,9 +20,8 @@
 </head>
 
 <body>
-  <div>
-    <h1>Momentum App</h1>
-  </div>
+  <!-- Content will be injected here -->
+  @yield('content')
 </body>
 
 </html>
