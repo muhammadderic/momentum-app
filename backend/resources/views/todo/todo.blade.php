@@ -56,13 +56,14 @@
         <div class="bg-white shadow-md rounded-lg p-6">
           <form
             id="search-form"
-            action=""
+            action="{{ route('todo') }}"
             method="get">
             <div class="flex mb-6">
               <input
                 type="text"
                 class="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="search"
+                value="{{ request('search') }}"
                 placeholder="Search tasks">
 
               <button type="submit" class="bg-gray-500 text-white px-4 rounded-r-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
