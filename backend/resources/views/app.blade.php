@@ -22,6 +22,9 @@
 <body>
   <!-- Content will be injected here -->
   @yield('content')
+
+  <!-- Allow page-specific scripts to be pushed -->
+  @stack('body-scripts')
 </body>
 
 </html>
